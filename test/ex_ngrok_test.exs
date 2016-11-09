@@ -2,7 +2,12 @@ defmodule NgrokTest do
   use ExUnit.Case
   doctest Ngrok
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  setup do
+    Application.stop(:ex_ngrok)
+    :ok = Application.start(:ex_ngrok)
+  end
+
+  test "it stores the settings" do
+    assert Ngrok.Settings.get("public_url") =~ ~r/http:\/\/(.*)\.ngrok\.io/
   end
 end
