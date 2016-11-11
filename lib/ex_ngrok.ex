@@ -10,11 +10,11 @@ defmodule Ngrok do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(Ngrok.Executable, [executable_with_arguments], id: :ex_ngrok),
+      worker(Ngrok.Executable, [executable_with_arguments]),
       worker(Ngrok.Settings, []),
     ]
 
-    opts = [strategy: :one_for_one, name: Ngrok.Supervisor]
+    opts = [strategy: :rest_for_one, name: Ngrok.Supervisor]
     Supervisor.start_link(children, opts)
   end
 

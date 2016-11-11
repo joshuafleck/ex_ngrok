@@ -6,7 +6,7 @@ defmodule Ngrok.Executable do
   use GenServer
 
   def start_link(executable_with_arguments) do
-    GenServer.start_link(__MODULE__, executable_with_arguments)
+    GenServer.start_link(__MODULE__, executable_with_arguments, name: __MODULE__)
   end
 
   def init(executable_with_arguments) do
