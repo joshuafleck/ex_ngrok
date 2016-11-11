@@ -13,7 +13,7 @@ Add ex_ngrok to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:ex_ngrok, github: "joshuafleck/ex_ngrok", only: [:dev]}}]
+  [{:ex_ngrok, github: "joshuafleck/ex_ngrok", only: [:dev]}]
 end
 
 def application do
@@ -24,17 +24,18 @@ end
 
 ## Configuration
 
-The following configurations can be set (defaults shown):
+You will need to set the following configuration variables in your `config/config.exs` file:
 
 ```elixir
-# The name of the Ngrok executable
-config :ex_ngrok, executable: "ngrok"
-# The type of tunnel
-config :ex_ngrok, protocol: "http"
-# The port to which Ngrok will forward requests
-config :ex_ngrok, port: "4000"
-# The URL of Ngrok's API (used to retrieve its settings)
-config :ex_ngrok, api_url: "http://localhost:4040/api/tunnels"
+config :ex_ngrok,
+  # The name of the Ngrok executable
+  executable: "ngrok",
+  # The type of tunnel
+  protocol: "http",
+  # The port to which Ngrok will forward requests
+  port: "4000",
+  # The URL of Ngrok's API (used to retrieve its settings)
+  api_url: "http://localhost:4040/api/tunnels"
 ```
 
 ## Usage

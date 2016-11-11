@@ -1,6 +1,11 @@
 use Mix.Config
 
-config :ex_ngrok, executable: "ngrok"
-config :ex_ngrok, protocol: "http"
-config :ex_ngrok, port: "4000"
-config :ex_ngrok, api_url: "http://localhost:4040/api/tunnels"
+config :ex_ngrok,
+  # The name of the Ngrok executable
+  executable: "ngrok",
+  # The type of tunnel
+  protocol: "http",
+  # The port to which Ngrok will forward requests
+  port: "4000",
+  # The URL of Ngrok's API (used to retrieve its settings)
+  api_url: "http://localhost:4040/api/tunnels"
