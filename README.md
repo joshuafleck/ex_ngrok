@@ -13,7 +13,7 @@ Add ex_ngrok to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:ex_ngrok, github: "joshuafleck/ex_ngrok"}]
+  [{:ex_ngrok, github: "joshuafleck/ex_ngrok", only: [:dev]}}]
 end
 
 def application do
@@ -41,6 +41,10 @@ config :ex_ngrok, api_url: "http://localhost:4040/api/tunnels"
 
 ### Retrieving your public URL
 
+Ngrok will create a public URL that tunnels to your development machine.
+The URL will change every time Ngrok starts, but you can retrieve the URL
+by running the following:
+
 ```elixir
-Ngrok.Settings.get("public_url")
+Ngrok.Settings.get("public_url") # => http://(.*).ngrok.io/
 ```
