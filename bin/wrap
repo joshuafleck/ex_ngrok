@@ -1,0 +1,12 @@
+#!/bin/bash
+# Executes the provided command, terminating it when it receives an EOF
+# See: https://shift.infinite.red/foreign-processes-and-phoenix-555179c24151#.1g44vqtoc
+COMMAND=$1
+shift
+ARGUMENTS=$*
+$COMMAND $ARGUMENTS &
+last_pid=$!
+while read line ; do
+  :
+done < /dev/stdin
+kill -KILL $last_pid
