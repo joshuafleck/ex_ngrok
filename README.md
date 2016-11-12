@@ -1,5 +1,8 @@
 # ex_ngrok
-To simplify development of Elixir applications that expect callbacks from external services, this application wraps [Ngrok](https://ngrok.com/) and will start/stop [Ngrok](https://ngrok.com/) on the command line when you start/stop your Elixir application.
+
+A wrapper around [Ngrok](https://ngrok.com/) providing a secure tunnel to localhost for demoing your Elixir/Phoenix web application or testing webhook integrations.
+
+Once installed, ex_ngrok will manage starting and stopping Ngrok with your application and expose Ngrok's settings to your application.
 
 ## Dependencies
 
