@@ -1,7 +1,7 @@
 defmodule Ngrok.Api do
   @moduledoc """
   Provides the ability to fetch the Ngrok settings from the Ngrok API
-  See: https://ngrok.com/docs#client-api-base
+  - See: https://ngrok.com/docs#client-api-base
   """
   @type error :: {:error, String.t}
   @type successful_parse :: {:ok, map}

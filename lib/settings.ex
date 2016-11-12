@@ -1,7 +1,7 @@
 defmodule Ngrok.Settings do
   @moduledoc """
   Exposes Ngrok's tunnel settings
-  See: https://ngrok.com/docs#list-tunnels
+  - See: https://ngrok.com/docs#list-tunnels
   """
 
   def start_link do
