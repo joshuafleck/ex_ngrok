@@ -21,7 +21,7 @@ end
 
 def application do
   [ applications: [:ex_ngrok] ]
-  # Application dependency auto-starts it, otherwise: Ngrok.start
+  # Application dependency auto-starts it, otherwise: Application.start(:ex_ngrok)
 end
 ```
 

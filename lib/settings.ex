@@ -8,6 +8,17 @@ defmodule Ngrok.Settings do
     Agent.start_link(fn -> announce_settings end, name: __MODULE__)
   end
 
+  @doc """
+  Retrieves a setting by name from the Ngrok tunnel
+
+  - [List of available settings](https://ngrok.com/docs#list-tunnels)
+
+  ## Example
+
+  Get the public URL of the Ngrok tunnel
+
+      Ngrok.Settings.get("public_url")
+  """
   @spec get(String.t) :: String.t | map | nil
   def get(field_name) do
     Agent.get(__MODULE__, &Map.get(&1, field_name))
