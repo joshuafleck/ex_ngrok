@@ -5,14 +5,24 @@ defmodule Ngrok.Executable do
   """
   use GenServer
 
-  def start_link(executable_with_arguments) do
-    GenServer.start_link(__MODULE__, executable_with_arguments, name: __MODULE__)
+  def start_link do
+    GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 
-  def init(executable_with_arguments) do
+  def init(:ok) do
     port = Port.open(
-      {:spawn_executable, "#{Path.dirname(__ENV__.file)}/../bin/wrap"},
-      [{:args, executable_with_arguments}])
+      {:spawn, "#{Path.dirname(__ENV__.file)}/../bin/wrap #{ngrok}"},
+      [])
     {:ok, port}
+  end
+
+  @spec ngrok :: String.t
+  defp ngrok do
+    arguments = [
+      Application.get_env(:ex_ngrok, :executable),
+      Application.get_env(:ex_ngrok, :protocol),
+      Application.get_env(:ex_ngrok, :port),
+    ]
+    Enum.join(arguments, " ")
   end
 end
