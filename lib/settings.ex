@@ -5,12 +5,19 @@ defmodule Ngrok.Settings do
   """
 
   def start_link do
-    Agent.start_link(fn -> first_tunnel_settings end, name: __MODULE__)
+    Agent.start_link(fn -> announce_settings end, name: __MODULE__)
   end
 
   @spec get(String.t) :: String.t | map | nil
   def get(field_name) do
     Agent.get(__MODULE__, &Map.get(&1, field_name))
+  end
+
+  @spec announce_settings :: map
+  defp announce_settings do
+    settings = first_tunnel_settings
+    announce(settings)
+    settings
   end
 
   @spec first_tunnel_settings :: map
@@ -24,5 +31,10 @@ defmodule Ngrok.Settings do
       {:error, message} ->
         first_tunnel_settings(total_attempts + 1, message)
     end
+  end
+
+  @spec announce(map) :: :ok
+  defp announce(settings) do
+    IO.puts "ex_ngrok: Ngrok tunnel available at #{settings["public_url"]}"
   end
 end
