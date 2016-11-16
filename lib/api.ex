@@ -30,7 +30,7 @@ defmodule Ngrok.Api do
     end
   end
 
-  @spec parse(successful_get) :: error | successful_parse
+  @spec parse(String.t) :: error | successful_parse
   defp parse(body) do
     case Poison.Parser.parse(body) do
       {:ok, parsed} ->
@@ -41,7 +41,7 @@ defmodule Ngrok.Api do
     end
   end
 
-  @spec first_tunnel(successful_parse) :: error | successful_parse
+  @spec first_tunnel(map) :: error | successful_parse
   defp first_tunnel(parsed) do
     case List.first(Map.fetch!(parsed, "tunnels")) do
       nil ->
