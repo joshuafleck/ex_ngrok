@@ -37,7 +37,8 @@ end
 
 ## Configuration
 
-You will need to set the following configuration variables in your `config/config.exs` file:
+The default configurations may be overriden by setting any
+of the following in your `config/config.exs` file:
 
 ```elixir
 config :ex_ngrok,
