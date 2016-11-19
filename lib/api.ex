@@ -9,7 +9,7 @@ defmodule Ngrok.Api do
 
   @spec first_tunnel_settings() :: error | successful_parse
   def first_tunnel_settings do
-    with api_url = Application.get_env(:ex_ngrok, :api_url, "http://localhost:4040/api/tunnels"),
+    with api_url = Application.get_env(:ex_ngrok, :api_url),
       {:ok, body} <- get(api_url),
       {:ok, parsed} <- parse(body) do
       first_tunnel(parsed)

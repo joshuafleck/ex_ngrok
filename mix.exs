@@ -15,6 +15,13 @@ defmodule Ngrok.Mixfile do
 
   def application do
     [applications: [:logger, :httpoison],
+     env: [
+      api_url: "http://localhost:4040/api/tunnels",
+      executable: "ngrok",
+      protocol: "http",
+      port: "4000",
+      options: "",
+     ],
      mod: {Ngrok, []}]
   end
 
