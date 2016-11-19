@@ -19,9 +19,19 @@ def deps do
   [{:ex_ngrok, github: "joshuafleck/ex_ngrok", only: [:dev]}]
 end
 
+# We really only want to run Ngrok in development, so
+# we only start :ex_ngrok when the env is dev.
+# Otherwise, it can be started manually with: Application.start(:ex_ngrok)
 def application do
-  [ applications: [:ex_ngrok] ]
-  # Application dependency auto-starts it, otherwise: Application.start(:ex_ngrok)
+  [ applications: env_specific_applications(Mix.env) ]
+end
+
+def env_specific_applications(:dev) do
+  [:ex_ngrok]
+end
+
+def env_specific_applications(_) do
+  []
 end
 ```
 
