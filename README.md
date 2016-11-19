@@ -19,9 +19,19 @@ def deps do
   [{:ex_ngrok, github: "joshuafleck/ex_ngrok", only: [:dev]}]
 end
 
+# We really only want to run Ngrok in development, so
+# we only start :ex_ngrok when the env is dev.
+# Otherwise, it can be started manually with: Application.start(:ex_ngrok)
 def application do
-  [ applications: [:ex_ngrok] ]
-  # Application dependency auto-starts it, otherwise: Application.start(:ex_ngrok)
+  [ applications: env_specific_applications(Mix.env) ]
+end
+
+def env_specific_applications(:dev) do
+  [:ex_ngrok]
+end
+
+def env_specific_applications(_) do
+  []
 end
 ```
 
@@ -33,7 +43,7 @@ You will need to set the following configuration variables in your `config/confi
 config :ex_ngrok,
   # The name of the Ngrok executable
   executable: "ngrok",
-  # The type of tunnel
+  # The type of tunnel (http, tcp, or tls)
   protocol: "http",
   # The port to which Ngrok will forward requests
   port: "4000",

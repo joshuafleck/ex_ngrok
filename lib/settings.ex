@@ -3,6 +3,7 @@ defmodule Ngrok.Settings do
   Exposes Ngrok's tunnel settings
   - See: https://ngrok.com/docs#list-tunnels
   """
+  require Logger
 
   def start_link do
     Agent.start_link(fn -> announce_settings end, name: __MODULE__)
@@ -46,6 +47,6 @@ defmodule Ngrok.Settings do
 
   @spec announce(map) :: :ok
   defp announce(settings) do
-    IO.puts "ex_ngrok: Ngrok tunnel available at #{settings["public_url"]}"
+    Logger.info "ex_ngrok: Ngrok tunnel available at #{settings["public_url"]}"
   end
 end
