@@ -19,6 +19,7 @@ defmodule NgrokTest do
     Application.delete_env(:ex_ngrok, :executable)
     Application.delete_env(:ex_ngrok, :protocol)
     Application.delete_env(:ex_ngrok, :port)
+    Application.delete_env(:ex_ngrok, :options)
     assert_application_start_success
   end
 

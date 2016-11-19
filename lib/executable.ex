@@ -22,6 +22,7 @@ defmodule Ngrok.Executable do
       Application.get_env(:ex_ngrok, :executable, "ngrok"),
       Application.get_env(:ex_ngrok, :protocol, "http"),
       Application.get_env(:ex_ngrok, :port, "4000"),
+      Application.get_env(:ex_ngrok, :options, ""),
     ]
     Enum.join(arguments, " ")
   end

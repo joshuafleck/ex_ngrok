@@ -49,7 +49,9 @@ config :ex_ngrok,
   # The port to which Ngrok will forward requests
   port: "4000",
   # The URL of Ngrok's API (used to retrieve its settings)
-  api_url: "http://localhost:4040/api/tunnels"
+  api_url: "http://localhost:4040/api/tunnels",
+  # Any other tunneling options that will be passed directly to Ngrok
+  options: ""
 ```
 
 ## Usage
