@@ -19,10 +19,10 @@ defmodule Ngrok.Executable do
   @spec ngrok :: String.t
   defp ngrok do
     arguments = [
-      Application.get_env(:ex_ngrok, :executable, "ngrok"),
-      Application.get_env(:ex_ngrok, :protocol, "http"),
-      Application.get_env(:ex_ngrok, :port, "4000"),
-      Application.get_env(:ex_ngrok, :options, ""),
+      Application.get_env(:ex_ngrok, :executable),
+      Application.get_env(:ex_ngrok, :protocol),
+      Application.get_env(:ex_ngrok, :port),
+      Application.get_env(:ex_ngrok, :options),
     ]
     Enum.join(arguments, " ")
   end
