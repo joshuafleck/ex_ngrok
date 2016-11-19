@@ -37,7 +37,7 @@ end
 
 ## Configuration
 
-The default configurations may be overriden by setting any
+The default configurations may be overridden by setting any
 of the following in your `config/config.exs` file:
 
 ```elixir
