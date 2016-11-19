@@ -37,7 +37,8 @@ end
 
 ## Configuration
 
-You will need to set the following configuration variables in your `config/config.exs` file:
+The default configurations may be overriden by setting any
+of the following in your `config/config.exs` file:
 
 ```elixir
 config :ex_ngrok,
@@ -48,7 +49,9 @@ config :ex_ngrok,
   # The port to which Ngrok will forward requests
   port: "4000",
   # The URL of Ngrok's API (used to retrieve its settings)
-  api_url: "http://localhost:4040/api/tunnels"
+  api_url: "http://localhost:4040/api/tunnels",
+  # Any other tunneling options that will be passed directly to Ngrok
+  options: ""
 ```
 
 ## Usage

@@ -11,9 +11,16 @@ defmodule NgrokTest do
 
   @custom_configuration api_url: "http://localhost:4040/api/tunnels"
   test "it stores the settings" do
-    :ok = Application.start(:ex_ngrok)
+    assert_application_start_success
+  end
 
-    assert Ngrok.Settings.get("public_url") =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
+  test "it has valid default settings" do
+    Application.delete_env(:ex_ngrok, :api_url)
+    Application.delete_env(:ex_ngrok, :executable)
+    Application.delete_env(:ex_ngrok, :protocol)
+    Application.delete_env(:ex_ngrok, :port)
+    Application.delete_env(:ex_ngrok, :options)
+    assert_application_start_success
   end
 
   @custom_configuration api_url: "http://localhost:0"
@@ -34,5 +41,10 @@ defmodule NgrokTest do
   defp assert_application_start_error(expected_message) do
     {:error, {{:shutdown, {:failed_to_start_child, Ngrok.Settings, {%RuntimeError{message: actual_message}, _stack_trace}}}, _info}} = Application.start(:ex_ngrok)
     assert actual_message =~ expected_message
+  end
+
+  defp assert_application_start_success do
+    :ok = Application.start(:ex_ngrok)
+    assert Ngrok.Settings.get("public_url") =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
   end
 end
