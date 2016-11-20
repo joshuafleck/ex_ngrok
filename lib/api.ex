@@ -12,7 +12,7 @@ defmodule Ngrok.Api do
     with api_url = Application.get_env(:ex_ngrok, :api_url),
       {:ok, body} <- get(api_url),
       {:ok, parsed} <- parse(body) do
-      first_tunnel(parsed)
+      find_tunnel(parsed)
     end
   end
 
@@ -41,14 +41,21 @@ defmodule Ngrok.Api do
     end
   end
 
-  @spec first_tunnel(map) :: error | successful_parse
-  defp first_tunnel(parsed) do
-    case List.first(Map.fetch!(parsed, "tunnels")) do
+  @spec find_tunnel(map) :: error | successful_parse
+  defp find_tunnel(parsed) do
+    tunnels = Map.fetch!(parsed, "tunnels")
+    protocol = Application.get_env(:ex_ngrok, :protocol)
+    case Enum.find(tunnels, &tunnel_for_protocol(&1, protocol)) do
       nil ->
-        {:error, "No Ngrok tunnels found"}
+        {:error, "No Ngrok tunnels found for protocol: #{protocol}"}
 
       tunnel ->
         {:ok, tunnel}
     end
+  end
+
+  @spec tunnel_for_protocol(map, String.t) :: boolean
+  defp tunnel_for_protocol(tunnel, protocol) do
+    Map.fetch!(tunnel, "proto") == protocol
   end
 end
