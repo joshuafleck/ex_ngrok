@@ -17,4 +17,16 @@ defmodule Ngrok do
     opts = [strategy: :rest_for_one, name: Ngrok.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
+  @doc """
+  Retrieves the public URL of the Ngrok tunnel
+
+  ## Example
+
+      Ngrok.public_url # => http://(.*).ngrok.io/
+  """
+  @spec public_url :: String.t
+  def public_url do
+    Ngrok.Settings.get("public_url")
+  end
 end
