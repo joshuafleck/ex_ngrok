@@ -7,8 +7,8 @@ defmodule Ngrok.Api do
   @type successful_parse :: {:ok, map}
   @type successful_get :: {:ok, String.t}
 
-  @spec first_tunnel_settings() :: error | successful_parse
-  def first_tunnel_settings do
+  @spec tunnel_settings() :: error | successful_parse
+  def tunnel_settings do
     with api_url = Application.get_env(:ex_ngrok, :api_url),
       {:ok, body} <- get(api_url),
       {:ok, parsed} <- parse(body) do

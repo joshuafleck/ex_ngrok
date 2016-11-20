@@ -6,7 +6,7 @@ defmodule Ngrok.Settings do
   require Logger
 
   def start_link do
-    Agent.start_link(fn -> announce_settings end, name: __MODULE__)
+    Agent.start_link(fn -> fetch_and_announce_settings end, name: __MODULE__)
   end
 
   @doc """
@@ -25,28 +25,28 @@ defmodule Ngrok.Settings do
     Agent.get(__MODULE__, &Map.get(&1, field_name))
   end
 
-  @spec announce_settings :: map
-  defp announce_settings do
-    settings = first_tunnel_settings
-    announce(settings)
-    settings
+  @spec fetch_and_announce_settings :: map
+  defp fetch_and_announce_settings do
+    tunnel_settings
+    |> announce
   end
 
-  @spec first_tunnel_settings :: map
-  defp first_tunnel_settings(), do: first_tunnel_settings(0, "")
-  defp first_tunnel_settings(6, error_message), do: raise "Unable to retrieve setting from Ngrok: #{error_message}"
-  defp first_tunnel_settings(total_attempts, _) do
+  @spec tunnel_settings :: map
+  defp tunnel_settings(), do: tunnel_settings(0, "")
+  defp tunnel_settings(6, error_message), do: raise "Unable to retrieve setting from Ngrok: #{error_message}"
+  defp tunnel_settings(total_attempts, _) do
     :timer.sleep(total_attempts * 100)
-    case Ngrok.Api.first_tunnel_settings do
+    case Ngrok.Api.tunnel_settings do
       {:ok, settings} ->
         settings
       {:error, message} ->
-        first_tunnel_settings(total_attempts + 1, message)
+        tunnel_settings(total_attempts + 1, message)
     end
   end
 
-  @spec announce(map) :: :ok
+  @spec announce(map) :: map
   defp announce(settings) do
     Logger.info "ex_ngrok: Ngrok tunnel available at #{settings["public_url"]}"
+    settings
   end
 end

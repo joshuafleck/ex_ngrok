@@ -63,5 +63,5 @@ The URL will change every time Ngrok starts, but you can retrieve the URL
 by running the following:
 
 ```elixir
-Ngrok.Settings.get("public_url") # => http://(.*).ngrok.io/
+Ngrok.public_url # => http://(.*).ngrok.io/
 ```

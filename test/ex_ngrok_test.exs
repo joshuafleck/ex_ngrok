@@ -13,7 +13,7 @@ defmodule NgrokTest do
   test "it stores the settings" do
     :ok = Application.start(:ex_ngrok)
 
-    assert Ngrok.Settings.get("public_url") =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
+    assert Ngrok.public_url =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
   end
 
   @custom_configuration api_url: "http://localhost:0"
