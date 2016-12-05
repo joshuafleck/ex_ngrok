@@ -12,13 +12,27 @@ Once installed, ex_ngrok will manage starting and stopping Ngrok with your appli
 
 ## Installation
 
-Add ex_ngrok to your `mix.exs` dependencies:
+Add ex_ngrok to your `mix.exs` dependencies...
+
+from Hex:
+
+```elixir
+def deps do
+  [{:ex_ngrok, "~> 0.3.0", only: [:dev]}]
+end
+```
+
+or, from Github:
 
 ```elixir
 def deps do
   [{:ex_ngrok, github: "joshuafleck/ex_ngrok", only: [:dev]}]
 end
+```
 
+Include :ex_ngrok as an application dependency:
+
+```elixir
 # We really only want to run Ngrok in development, so
 # we only start :ex_ngrok when the env is dev.
 # Otherwise, it can be started manually with: Application.start(:ex_ngrok)
