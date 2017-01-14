@@ -11,7 +11,7 @@ defmodule Ngrok.Executable do
 
   def init(:ok) do
     port = Port.open(
-      {:spawn, "#{Path.dirname(__ENV__.file)}/../bin/wrap #{ngrok}"},
+      {:spawn, "#{Path.dirname(__ENV__.file)}/../bin/wrap #{ngrok()}"},
       [])
     {:ok, port}
   end
