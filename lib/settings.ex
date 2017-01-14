@@ -6,7 +6,7 @@ defmodule Ngrok.Settings do
   require Logger
 
   def start_link do
-    Agent.start_link(fn -> fetch_and_announce_settings end, name: __MODULE__)
+    Agent.start_link(fn -> fetch_and_announce_settings() end, name: __MODULE__)
   end
 
   @doc """
@@ -27,7 +27,7 @@ defmodule Ngrok.Settings do
 
   @spec fetch_and_announce_settings :: map
   defp fetch_and_announce_settings do
-    tunnel_settings
+    tunnel_settings()
     |> announce
   end
 
