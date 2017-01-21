@@ -35,7 +35,7 @@ defmodule Ngrok.Settings do
   defp tunnel_settings(), do: tunnel_settings(0, "")
   defp tunnel_settings(6, error_message), do: raise "Unable to retrieve setting from Ngrok: #{error_message}"
   defp tunnel_settings(total_attempts, _) do
-    :timer.sleep(total_attempts * 100)
+    :timer.sleep(total_attempts * Application.get_env(:ex_ngrok, :sleep_between_attempts))
     case Ngrok.Api.tunnel_settings do
       {:ok, settings} ->
         settings

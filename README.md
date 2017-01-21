@@ -64,6 +64,8 @@ config :ex_ngrok,
   port: "4000",
   # The URL of Ngrok's API (used to retrieve its settings)
   api_url: "http://localhost:4040/api/tunnels",
+  # The amount of sleep (in ms) to put between attempts to connect to Ngrok
+  sleep_between_attempts: 200,
   # Any other tunneling options that will be passed directly to Ngrok
   options: ""
 ```
