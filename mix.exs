@@ -3,7 +3,7 @@ defmodule Ngrok.Mixfile do
 
   def project do
     [app: :ex_ngrok,
-     version: "0.3.1",
+     version: "0.3.2",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -20,6 +20,7 @@ defmodule Ngrok.Mixfile do
       executable: "ngrok",
       protocol: "http",
       port: "4000",
+      sleep_between_attempts: 200,
       options: "",
      ],
      mod: {Ngrok, []}]
