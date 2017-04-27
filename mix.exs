@@ -9,12 +9,11 @@ defmodule Ngrok.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(),
      package: package(),
-     description: description(),
-     dialyzer: [plt_add_deps: :transitive]]
+     description: description()]
   end
 
   def application do
-    [applications: [:logger, :httpoison],
+    [extra_applications: [:logger],
      env: [
       api_url: "http://localhost:4040/api/tunnels",
       executable: "ngrok",
@@ -30,7 +29,7 @@ defmodule Ngrok.Mixfile do
     [
       {:ex_doc, "~> 0.14", only: :dev},
       {:credo, "~> 0.5", only: [:dev, :test]},
-      {:dialyxir, "~> 0.4", only: [:dev]},
+      {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
       {:httpoison, "~> 0.10"},
       {:poison, "~> 2.0"}
     ]
