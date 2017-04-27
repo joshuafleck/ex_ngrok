@@ -9,12 +9,11 @@ defmodule Ngrok.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(),
      package: package(),
-     description: description(),
-     dialyzer: [plt_add_deps: :transitive]]
+     description: description()]
   end
 
   def application do
-    [applications: [:logger, :httpoison],
+    [extra_applications: [:logger],
      env: [
       api_url: "http://localhost:4040/api/tunnels",
       executable: "ngrok",
