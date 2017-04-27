@@ -29,7 +29,7 @@ defmodule Ngrok.Mixfile do
     [
       {:ex_doc, "~> 0.14", only: :dev},
       {:credo, "~> 0.5", only: [:dev, :test]},
-      {:dialyxir, "~> 0.4", only: [:dev]},
+      {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
       {:httpoison, "~> 0.10"},
       {:poison, "~> 2.0"}
     ]
