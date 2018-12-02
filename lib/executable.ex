@@ -20,10 +20,20 @@ defmodule Ngrok.Executable do
   defp ngrok do
     arguments = [
       Application.get_env(:ex_ngrok, :executable),
-      Application.get_env(:ex_ngrok, :protocol),
+      protocol(),
       Application.get_env(:ex_ngrok, :port),
       Application.get_env(:ex_ngrok, :options),
     ]
     Enum.join(arguments, " ")
+  end
+
+  @spec protocol :: String.t
+  defp protocol do
+    case Application.get_env(:ex_ngrok, :protocol) do
+      "https" ->
+        "http"
+      protocol ->
+        protocol
+    end
   end
 end

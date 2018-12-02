@@ -58,7 +58,7 @@ of the following in your `config/config.exs` file:
 config :ex_ngrok,
   # The name of the Ngrok executable
   executable: "ngrok",
-  # The type of tunnel (http, tcp, or tls)
+  # The type of tunnel (http, https, tcp, or tls)
   protocol: "http",
   # The port to which Ngrok will forward requests
   port: "4000",
