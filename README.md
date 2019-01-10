@@ -30,7 +30,7 @@ def deps do
 end
 ```
 
-Include :ex_ngrok as an application dependency:
+For **elixir 1.4 and above, you don't need to do anything**. Elixir 1.3 and under, include :ex_ngrok as an application dependency:
 
 ```elixir
 # We really only want to run Ngrok in development, so
