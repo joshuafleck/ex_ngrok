@@ -32,11 +32,10 @@ defmodule Ngrok.Api do
 
   @spec parse(String.t) :: error | successful_parse
   defp parse(body) do
-    case Poison.Parser.parse(body) do
+    case Jason.decode(body) do
       {:ok, parsed} ->
         {:ok, parsed}
-
-      _ ->
+      {:error, _} ->
         {:error, "Could not parse data from Ngrok API, data: #{body}"}
     end
   end

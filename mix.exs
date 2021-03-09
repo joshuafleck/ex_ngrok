@@ -27,11 +27,11 @@ defmodule Ngrok.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:credo, "~> 0.10", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
-      {:httpoison, "~> 1.4"},
-      {:poison, "~> 3.1"}
+      {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
+      {:credo, "~> 1.5.5", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.1.0", only: [:dev], runtime: false},
+      {:httpoison, "~> 1.8.0"},
+      {:jason, "~> 1.2.2"}
     ]
   end
 
