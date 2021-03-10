@@ -1,6 +1,6 @@
-defmodule NgrokTest do
+defmodule ExNgrokTest do
   use ExUnit.Case
-  doctest Ngrok
+  doctest ExNgrok
   @moduletag :capture_log
   ExUnit.Case.register_attribute __ENV__, :custom_configuration
 
@@ -13,7 +13,7 @@ defmodule NgrokTest do
   test "it stores the settings" do
     :ok = Application.start(:ex_ngrok)
 
-    assert Ngrok.public_url =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
+    assert ExNgrok.public_url =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
   end
 
   @custom_configuration api_url: "http://localhost:0"
@@ -32,7 +32,7 @@ defmodule NgrokTest do
   end
 
   defp assert_application_start_error(expected_message) do
-    {:error, {{:shutdown, {:failed_to_start_child, Ngrok.Settings, {%RuntimeError{message: actual_message}, _stack_trace}}}, _info}} = Application.start(:ex_ngrok)
+    {:error, {{:shutdown, {:failed_to_start_child, ExNgrok.Settings, {%RuntimeError{message: actual_message}, _stack_trace}}}, _info}} = Application.start(:ex_ngrok)
     assert actual_message =~ expected_message
   end
 end

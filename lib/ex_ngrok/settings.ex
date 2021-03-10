@@ -1,4 +1,4 @@
-defmodule Ngrok.Settings do
+defmodule ExNgrok.Settings do
   @moduledoc """
   Exposes Ngrok's tunnel settings
   - See: https://ngrok.com/docs#list-tunnels
@@ -18,7 +18,7 @@ defmodule Ngrok.Settings do
 
   Get the public URL of the Ngrok tunnel
 
-      Ngrok.Settings.get("public_url")
+      ExNgrok.Settings.get("public_url")
   """
   @spec get(String.t) :: String.t | map | nil
   def get(field_name) do
@@ -36,7 +36,7 @@ defmodule Ngrok.Settings do
   defp tunnel_settings(6, error_message), do: raise "Unable to retrieve setting from Ngrok: #{error_message}"
   defp tunnel_settings(total_attempts, _) do
     :timer.sleep(total_attempts * Application.get_env(:ex_ngrok, :sleep_between_attempts))
-    case Ngrok.Api.tunnel_settings do
+    case ExNgrok.Api.tunnel_settings do
       {:ok, settings} ->
         settings
       {:error, message} ->

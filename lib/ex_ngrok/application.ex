@@ -1,4 +1,4 @@
-defmodule Ngrok.Application do
+defmodule ExNgrok.Application do
   @moduledoc false
   use Application
 

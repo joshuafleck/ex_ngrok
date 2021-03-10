@@ -33,7 +33,7 @@ end
 Include :ex_ngrok as an application dependency:
 
 ```elixir
-# We really only want to run Ngrok in development, so
+# We really only want to run ExNgrok in development, so
 # we only start :ex_ngrok when the env is dev.
 # Otherwise, it can be started manually with: Application.start(:ex_ngrok)
 def application do
@@ -79,5 +79,5 @@ The URL will change every time Ngrok starts, but you can retrieve the URL
 by running the following:
 
 ```elixir
-Ngrok.public_url # => http://(.*).ngrok.io/
+ExNgrok.public_url # => http://(.*).ngrok.io/
 ```

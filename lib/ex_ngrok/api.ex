@@ -1,4 +1,4 @@
-defmodule Ngrok.Api do
+defmodule ExNgrok.Api do
   @moduledoc """
   Provides the ability to fetch the Ngrok settings from the Ngrok API
   - See: https://ngrok.com/docs#client-api-base

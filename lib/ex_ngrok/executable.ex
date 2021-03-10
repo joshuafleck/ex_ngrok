@@ -1,4 +1,4 @@
-defmodule Ngrok.Executable do
+defmodule ExNgrok.Executable do
   @moduledoc """
   Spawns a foreign process that will be terminated when the application stops
   - See: https://shift.infinite.red/foreign-processes-and-phoenix-555179c24151#.at6f31kd4

@@ -1,4 +1,4 @@
-defmodule Ngrok.Mixfile do
+defmodule ExNgrok.Mixfile do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule Ngrok.Mixfile do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Ngrok.Application, []}
+      mod: {ExNgrok.Application, []}
     ]
   end
 
