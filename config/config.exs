@@ -6,4 +6,5 @@ config :ex_ngrok,
   protocol: "http",
   port: "4000",
   sleep_between_attempts: 200,
-  options: ""
+  options: "",
+  bin_wrap: Path.relative_to_cwd("bin/wrap")

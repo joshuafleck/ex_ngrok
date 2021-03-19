@@ -1,34 +1,32 @@
 defmodule ExNgrokTest do
   use ExUnit.Case
-  doctest ExNgrok
   @moduletag :capture_log
-  ExUnit.Case.register_attribute __ENV__, :custom_configuration
 
   setup context do
     Application.stop(:ex_ngrok)
-    Application.put_env(:ex_ngrok, :api_url, context.registered.custom_configuration[:api_url])
+    Application.put_env(:ex_ngrok, :api_url, context[:api_url])
   end
 
-  @custom_configuration api_url: "http://localhost:4040/api/tunnels"
+  @tag api_url: "http://localhost:4040/api/tunnels"
   test "it stores the settings" do
     :ok = Application.start(:ex_ngrok)
 
     assert ExNgrok.public_url =~ ~r/http(s)?:\/\/(.*)\.ngrok\.io/
   end
 
-  @custom_configuration api_url: "http://localhost:0"
+  @tag api_url: "http://localhost:0"
   test "it raises when it cannot connect to the Ngrok API" do
     assert_application_start_error("Unable to retrieve setting from Ngrok: Could not connect to Ngrok API on http://localhost:0, reason: eaddrnotavail")
   end
 
-  @custom_configuration api_url: "http://localhost:4040/not_found"
+  @tag api_url: "http://localhost:4040/not_found"
   test "it raises when it cannot find the Ngrok API" do
     assert_application_start_error("Unable to retrieve setting from Ngrok: Could not find Ngrok API on http://localhost:4040/not_found, data: {\"status_code\":404,\"msg\":\"Not Found\",\"details\":{\"path\":\"/not_found\"}}\n")
   end
 
-  @custom_configuration api_url: "https://github.com/"
+  @tag api_url: "https://api.pipedream.com/v1/sources"
   test "it raises when it cannot parse the Ngrok API" do
-    assert_application_start_error("Unable to retrieve setting from Ngrok: Could not parse data from Ngrok API, data:")
+    assert_application_start_error("Unable to retrieve setting from Ngrok: Could not find Ngrok API on https://api.pipedream.com/v1/sources, data:")
   end
 
   defp assert_application_start_error(expected_message) do

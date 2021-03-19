@@ -5,7 +5,9 @@ defmodule ExNgrok.Settings do
   """
   require Logger
 
-  def start_link do
+  use Agent
+
+  def start_link(_) do
     Agent.start_link(fn -> fetch_and_announce_settings() end, name: __MODULE__)
   end
 
@@ -22,7 +24,7 @@ defmodule ExNgrok.Settings do
   """
   @spec get(String.t) :: String.t | map | nil
   def get(field_name) do
-    Agent.get(__MODULE__, &Map.get(&1, field_name))
+    Agent.get(__MODULE__, &(&1[field_name]))
   end
 
   @spec fetch_and_announce_settings :: map
@@ -35,7 +37,7 @@ defmodule ExNgrok.Settings do
   defp tunnel_settings, do: tunnel_settings(0, "")
   defp tunnel_settings(6, error_message), do: raise "Unable to retrieve setting from Ngrok: #{error_message}"
   defp tunnel_settings(total_attempts, _) do
-    :timer.sleep(total_attempts * Application.get_env(:ex_ngrok, :sleep_between_attempts))
+    Process.sleep(total_attempts * Application.get_env(:ex_ngrok, :sleep_between_attempts))
     case ExNgrok.Api.tunnel_settings do
       {:ok, settings} ->
         settings
