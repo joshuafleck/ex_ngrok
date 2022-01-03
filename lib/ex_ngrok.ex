@@ -10,8 +10,8 @@ defmodule Ngrok do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(Ngrok.Executable, []),
-      worker(Ngrok.Settings, []),
+      {Ngrok.Executable, []},
+      {Ngrok.Settings, []}
     ]
 
     opts = [strategy: :rest_for_one, name: Ngrok.Supervisor]

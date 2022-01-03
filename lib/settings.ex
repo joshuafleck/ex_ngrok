@@ -4,9 +4,15 @@ defmodule Ngrok.Settings do
   - See: https://ngrok.com/docs#list-tunnels
   """
   require Logger
+  
+  use GenServer
 
-  def start_link do
+  def start_link(_init_arg) do
     Agent.start_link(fn -> fetch_and_announce_settings() end, name: __MODULE__)
+  end
+  
+  def init(:ok) do
+    {:ok, true}
   end
 
   @doc """
